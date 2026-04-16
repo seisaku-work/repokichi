@@ -120,3 +120,40 @@ export async function POST(req: Request) {
     );
   }
 }
+export async function GET(req: Request) {
+  await connectMongo();
+
+  try {
+    const { searchParams } = new URL(req.url);
+    const dateFrom = searchParams.get("dateFrom");
+    const dateTo = searchParams.get("dateTo");
+
+    const filter: any = {
+      deletedAt: null,
+    };
+
+    if (dateFrom || dateTo) {
+      filter.reportDate = {};
+      if (dateFrom) filter.reportDate.$gte = new Date(dateFrom);
+      if (dateTo) filter.reportDate.$lte = new Date(dateTo);
+    }
+
+    const reports = await Report.find(filter)
+      .sort({ reportDate: -1, createdAt: -1 })
+      .lean();
+
+    return NextResponse.json({
+      success: true,
+      data: reports,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "日報一覧取得に失敗しました",
+        error: error?.message ?? "Unknown error",
+      },
+      { status: 400 }
+    );
+  }
+}
