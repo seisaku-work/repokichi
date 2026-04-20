@@ -1,0 +1,22 @@
+src/
+  app/
+    api/
+      reports/
+      auth/
+    login/
+    reports/
+      new/
+      [id]/
+      [id]/edit/
+    layout.tsx
+    page.tsx
+  lib/
+    mongoose.ts
+  models/
+    User.ts
+    Report.ts
+    CampusKpi.ts
+    OcEntry.ts
+    Attendance.ts
+  types/
+    report.ts
