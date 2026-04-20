@@ -9,42 +9,29 @@ const AttendanceSchema = new Schema(
       index: true,
     },
     reportDate: { type: Date, required: true, index: true },
-
     campusCode: { type: String, required: true, trim: true },
     campusName: { type: String, required: true, trim: true },
-
     attendanceTypeCode: {
       type: String,
+      enum: ["oc_visit", "mirai", "tokutaisei", "guardian", "online_oc", "individual"],
       required: true,
-      enum: [
-        "oc_visit",
-        "mirai",
-        "tokutaisei",
-        "guardian",
-        "online_oc",
-        "individual",
-      ],
     },
-    attendanceTypeName: { type: String, required: true },
-
+    attendanceTypeName: { type: String, required: true, trim: true },
     sessionCode: {
       type: String,
-      required: true,
       enum: ["morning", "afternoon", "other"],
+      required: true,
     },
-    sessionName: { type: String, required: true },
-
+    sessionName: { type: String, required: true, trim: true },
     courseCode: {
       type: String,
-      required: true,
       enum: ["beauty", "tb", "wp", "bs"],
+      required: true,
     },
-    courseName: { type: String, required: true },
-
-    groupsCount: { type: Number, required: true, default: 0, min: 0 },
-    peopleCount: { type: Number, required: true, default: 0, min: 0 },
-
-    sourceCampusLabel: { type: String, default: null },
+    courseName: { type: String, required: true, trim: true },
+    groupsCount: { type: Number, default: 0 },
+    peopleCount: { type: Number, default: 0 },
+    sourceCampusLabel: { type: String, default: null, trim: true },
     rawText: { type: String, default: null },
   },
   { timestamps: true }

@@ -44,7 +44,9 @@ export default async function ReportsPage() {
             {reports.map((report: any) => (
               <tr key={report._id}>
                 <td style={{ border: "1px solid #ccc", padding: "8px" }}>
-                  {new Date(report.reportDate).toLocaleDateString("ja-JP")}
+                  <a href={`/reports/${report._id}`}>
+                    {new Date(report.reportDate).toLocaleDateString("ja-JP")}
+                  </a>
                 </td>
                 <td style={{ border: "1px solid #ccc", padding: "8px" }}>
                   {report.authorName}
