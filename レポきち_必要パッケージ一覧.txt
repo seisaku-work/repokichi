@@ -1,5 +1,0 @@
-npm install mongoose zod react-hook-form bcryptjs
-npm install next-auth
-npm install exceljs playwright
-npm install clsx tailwind-merge
-npm install -D @types/bcryptjs
