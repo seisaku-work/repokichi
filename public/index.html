@@ -2,18 +2,78 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>レポきち</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レポきち - 新規日報作成</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; margin: 0; }
-        .container { text-align: center; background: white; padding: 50px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; }
-        p { color: #3498db; font-weight: bold; }
+        body { font-family: sans-serif; background-color: #f4f7f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #2c3e50; text-align: center; }
+        .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
+        input[type="date"], input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: #2980b9; }
+
+        /* 色付きボックスのデザイン */
+        .color-box { padding: 20px; border-radius: 8px; }
+        .color-box label { color: #fff; }
+        .bg-blue { background-color: #3498db; }
+        .bg-cyan { background-color: #1abc9c; }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>🚀 新生レポきち、起動成功！</h1>
-        <p>サーバーは正常に稼働しています。ここからUIを構築していきます。</p>
+        <h1>📝 新規日報作成</h1>
+
+        <div class="card">
+            <h2>基本情報</h2>
+            <div class="grid">
+                <div>
+                    <label for="date">日付</label>
+                    <input type="date" id="date">
+                </div>
+                <div>
+                    <label for="author">入力者名</label>
+                    <input type="text" id="author" placeholder="（ログイン機能で自動入力予定）">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>制作課 入力項目</h2>
+            <div class="grid">
+                <div class="color-box bg-blue">
+                    <label for="homepageOcReservations">ホームページOC予約数</label>
+                    <input type="number" id="homepageOcReservations" value="0">
+                </div>
+                <div class="color-box bg-cyan">
+                    <label for="snsFollowers">SNSフォロワー情報</label>
+                    <input type="number" id="snsFollowers" value="0">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>学生課 入力項目</h2>
+            <p>（ここにOCエントリー数などのフォームが追加されます）</p>
+        </div>
+
+        <button class="btn">日報を保存する</button>
     </div>
+
+    <script>
+        // ボタンや入力のロジックは、ここにこれから追加していきます。
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    </script>
 </body>
 </html>
