@@ -11,19 +11,10 @@
         .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
-        input[type="date"], input[type="text"], input[type="number"], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #dcdfe6;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
+        input[type="date"], input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background: #2980b9; }
-
-        /* 色付きボックスのデザイン */
         .color-box { padding: 20px; border-radius: 8px; }
         .color-box label { color: #fff; }
         .bg-blue { background-color: #3498db; }
@@ -68,12 +59,60 @@
             <p>（ここにOCエントリー数などのフォームが追加されます）</p>
         </div>
 
-        <button class="btn">日報を保存する</button>
+        <button class="btn" id="saveButton">日報を保存する</button>
     </div>
 
     <script>
-        // ボタンや入力のロジックは、ここにこれから追加していきます。
+        // --- ★★★ ここからが新機能 ★★★ ---
+
+        // 今日の日付を自動でセット
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
+
+        // 「日報を保存する」ボタンを取得
+        const saveButton = document.getElementById('saveButton');
+
+        // ボタンがクリックされたら、以下の処理を実行する
+        saveButton.addEventListener('click', async () => {
+            
+            // フォームから入力された値を取得
+            const reportData = {
+                date: document.getElementById('date').value,
+                homepageOcReservations: document.getElementById('homepageOcReservations').value,
+                // snsFollowersは別の方法で保存するので、一旦ここでは含めません
+            };
+
+            // 保存処理中はボタンを無効化
+            saveButton.disabled = true;
+            saveButton.textContent = '保存中...';
+
+            try {
+                // /api/reports という「窓口」めがけて、データを送信！
+                const response = await fetch('/api/reports', {
+                    method: 'POST', // 新規作成なのでPOST
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(reportData), // データをJSON形式に変換して送る
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('成功！日報がデータベースに保存されました。');
+                    // location.reload(); // 成功したらページをリロードする（今はコメントアウト）
+                } else {
+                    alert('エラーが発生しました：' + result.message);
+                }
+
+            } catch (error) {
+                console.error('送信エラー:', error);
+                alert('通信エラーが発生しました。');
+            } finally {
+                // 成功しても失敗しても、ボタンを元に戻す
+                saveButton.disabled = false;
+                saveButton.textContent = '日報を保存する';
+            }
+        });
     </script>
 </body>
 </html>
