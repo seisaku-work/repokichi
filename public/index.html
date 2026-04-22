@@ -11,13 +11,13 @@
         .logo-header img { max-width: 350px; width: 100%; height: auto; }
         .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
-        h3 { color: #555; margin-top: 30px; margin-bottom: 10px; font-size: 1em; border-left: 4px solid #3498db; padding-left: 10px; }
+        h3 { color: #333; font-weight: 600; margin-top: 30px; margin-bottom: 15px; font-size: 1.1em; border-left: 4px solid #3498db; padding-left: 12px; }
+        h4 { font-size: 1em; color: #555; margin-top: 20px; margin-bottom: 10px; font-weight: 600; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
         textarea { height: 100px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .grid-4-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background: #2980b9; }
         .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
@@ -25,6 +25,7 @@
         .data-table th { background-color: #f7f9fc; font-size: 0.9em; }
         .data-table td:first-child { text-align: left; font-weight: bold; background-color: #f7f9fc; }
         .data-table input { text-align: center; }
+        .department-group { margin-bottom: 25px; }
     </style>
 </head>
 <body>
@@ -59,31 +60,73 @@
 
             <!-- ★★★ ここからが今回の修正部分です ★★★ -->
             <h3>OCエントリー数（大阪校）</h3>
-            <div class="grid">
-                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="新規"></div>
-                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="リピーター"></div>
+            <div class="department-group">
+                <h4>美容科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-grade="高1"></div>
+                </div>
             </div>
 
             <h3>OCエントリー数（神戸校）</h3>
-            <div class="grid-4-col">
-                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-type="新規"></div>
-                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-type="リピーター"></div>
-                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="新規"></div>
-                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="リピーター"></div>
-                <div><label>WP科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-type="新規"></div>
-                <div><label>WP科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-type="リピーター"></div>
-                <div><label>BS科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-type="新規"></div>
-                <div><label>BS科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-type="リピーター"></div>
+            <div class="department-group">
+                <h4>美容科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-grade="高1"></div>
+                </div>
+            </div>
+            <div class="department-group">
+                <h4>TB科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-grade="高1"></div>
+                </div>
+            </div>
+            <div class="department-group">
+                <h4>WP科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-grade="高1"></div>
+                </div>
+            </div>
+            <div class="department-group">
+                <h4>BS科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-grade="高1"></div>
+                </div>
             </div>
 
             <h3>OCエントリー数（ベルブラ）</h3>
-            <div class="grid-4-col">
-                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-type="新規"></div>
-                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-type="リピーター"></div>
-                <div><label>WP科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-type="新規"></div>
-                <div><label>WP科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-type="リピーター"></div>
-                <div><label>BS科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-type="新規"></div>
-                <div><label>BS科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-type="リピーター"></div>
+            <div class="department-group">
+                <h4>TB科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-grade="高1"></div>
+                </div>
+            </div>
+            <div class="department-group">
+                <h4>WP科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-grade="高1"></div>
+                </div>
+            </div>
+            <div class="department-group">
+                <h4>BS科</h4>
+                <div class="grid-3-col">
+                    <div><label>高3生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-grade="高3"></div>
+                    <div><label>高2生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-grade="高2"></div>
+                    <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-grade="高1"></div>
+                </div>
             </div>
 
             <!-- 熊本校の学科構成が未確定のため、確認後にここに追加します -->
