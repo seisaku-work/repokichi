@@ -11,87 +11,74 @@
         .logo-header img { max-width: 350px; width: 100%; height: auto; }
         .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
-        h3 { color: #555; margin-top: 20px; margin-bottom: 10px; font-size: 1em; border-left: 4px solid #3498db; padding-left: 10px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
         input, select, textarea {
             width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 8px; box-sizing: border-box; font-size: 1em;
         }
-        textarea { height: 100px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .grid-4-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background: #2980b9; }
 
-        /* SNS入力テーブル用のスタイル */
-        .sns-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .sns-table th, .sns-table td { padding: 8px; text-align: center; border: 1px solid #e0e0e0; }
-        .sns-table th { background-color: #f7f9fc; font-size: 0.9em; }
-        .sns-table td:first-child { text-align: left; font-weight: bold; background-color: #f7f9fc; }
-        .sns-table input { text-align: center; }
+        /* ★★★ 新しい入力テーブル用のスタイル ★★★ */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .data-table th, .data-table td { padding: 8px; text-align: center; border: 1px solid #e0e0e0; }
+        .data-table th { background-color: #f7f9fc; font-size: 0.9em; }
+        .data-table td:first-child { text-align: left; font-weight: bold; background-color: #f7f9fc; }
+        .data-table input { text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="logo-header">
-            <img src="/logo.png" alt="レポきち ロゴ">
+            <!-- ★★★ 修正点 2: ロゴのファイル名を修正 ★★★ -->
+            <img src="/repokichi.png" alt="レポきち ロゴ">
         </div>
 
         <div class="card">
             <h2>基本情報</h2>
             <div class="grid">
-                <div>
-                    <label for="date">日付</label>
-                    <input type="date" id="date">
-                </div>
-                <div>
-                    <label for="author">入力者名</label>
-                    <input type="text" id="author" placeholder="（ログイン機能で自動入力予定）">
-                </div>
+                <div><label for="date">日付</label><input type="date" id="date"></div>
+                <div><label for="author">入力者名</label><input type="text" id="author" placeholder="（ログイン機能で自動入力予定）"></div>
             </div>
         </div>
 
-        <!-- ★★★ ここからが「制作課」の新しいUI ★★★ -->
+        <!-- ★★★ 修正点 1: 制作課のUIをテーブル形式に刷新 ★★★ -->
         <div class="card">
             <h2>制作課 入力項目</h2>
-
-            <h3>ホームページOC予約数</h3>
-            <div class="grid-4-col">
-                <div><label>大阪校</label><input type="number" value="0" class="hp-oc" data-campus="大阪校"></div>
-                <div><label>神戸校</label><input type="number" value="0" class="hp-oc" data-campus="神戸校"></div>
-                <div><label>ベルブラ</label><input type="number" value="0" class="hp-oc" data-campus="ベルブラ"></div>
-                <div><label>熊本校</label><input type="number" value="0" class="hp-oc" data-campus="熊本校"></div>
-            </div>
-
-            <h3 style="margin-top: 30px;">SNSフォロワー数</h3>
-            <table class="sns-table">
+            <table class="data-table" id="seisaku-table">
                 <thead>
                     <tr>
                         <th>キャンパス</th>
+                        <th>ホームページOC予約数</th>
                         <th>Instagram</th>
                         <th>TikTok</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr data-campus="大阪校">
                         <td>大阪校</td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="大阪校" data-platform="Instagram"></td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="大阪校" data-platform="TikTok"></td>
+                        <td><input type="number" value="0" class="hp-oc"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="TikTok"></td>
                     </tr>
-                    <tr>
+                    <tr data-campus="神戸校">
                         <td>神戸校</td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="神戸校" data-platform="Instagram"></td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="神戸校" data-platform="TikTok"></td>
+                        <td><input type="number" value="0" class="hp-oc"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="TikTok"></td>
                     </tr>
-                    <tr>
+                    <tr data-campus="ベルブラ">
                         <td>ベルブラ</td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="ベルブラ" data-platform="Instagram"></td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="ベルブラ" data-platform="TikTok"></td>
+                        <td><input type="number" value="0" class="hp-oc"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="TikTok"></td>
                     </tr>
-                    <tr>
+                    <tr data-campus="熊本校">
                         <td>熊本校</td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="熊本校" data-platform="Instagram"></td>
-                        <td><input type="number" value="0" class="sns-follower" data-campus="熊本校" data-platform="TikTok"></td>
+                        <td><input type="number" value="0" class="hp-oc"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-platform="TikTok"></td>
                     </tr>
                 </tbody>
             </table>
@@ -105,10 +92,66 @@
         <button class="btn" id="saveButton">日報を保存する</button>
     </div>
 
+    <!-- ★★★ 修正点 3: 保存ボタンのロジックを完全に実装 ★★★ -->
     <script>
-        // (ロジックはまだ変更しません)
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        document.getElementById('saveButton').addEventListener('click', async () => { /* ... */ });
+        const saveButton = document.getElementById('saveButton');
+
+        saveButton.addEventListener('click', async () => {
+            saveButton.disabled = true;
+            saveButton.textContent = '保存中...';
+
+            const homepageOcs = [];
+            const snsFollowers = [];
+
+            // テーブルの各行からデータを収集
+            document.querySelectorAll('#seisaku-table tbody tr').forEach(row => {
+                const campus = row.dataset.campus;
+
+                // HP OC予約数を収集
+                const hpInput = row.querySelector('.hp-oc');
+                if (hpInput) {
+                    homepageOcs.push({
+                        campus: campus,
+                        count: parseInt(hpInput.value, 10) || 0
+                    });
+                }
+
+                // SNSフォロワー数を収集
+                row.querySelectorAll('.sns-follower').forEach(snsInput => {
+                    snsFollowers.push({
+                        campus: campus,
+                        platform: snsInput.dataset.platform,
+                        count: parseInt(snsInput.value, 10) || 0
+                    });
+                });
+            });
+
+            const payload = {
+                date: document.getElementById('date').value,
+                homepageOcs: homepageOcs,
+                snsFollowers: snsFollowers
+            };
+
+            try {
+                const response = await fetch('/api/reports', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('成功！日報がデータベースに保存されました。');
+                } else {
+                    alert('エラーが発生しました：' + (result.error || result.message));
+                }
+            } catch (error) {
+                alert('通信エラーが発生しました。');
+            } finally {
+                saveButton.disabled = false;
+                saveButton.textContent = '日報を保存する';
+            }
+        });
     </script>
 </body>
 </html>
