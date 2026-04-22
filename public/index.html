@@ -18,14 +18,16 @@
         }
         textarea { height: 100px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .grid-4-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background: #2980b9; }
-        .color-box { padding: 20px; border-radius: 8px; }
-        .color-box label { color: #fff; }
-        .bg-blue { background-color: #3498db; }
-        .bg-cyan { background-color: #1abc9c; }
+
+        /* SNS入力テーブル用のスタイル */
+        .sns-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .sns-table th, .sns-table td { padding: 8px; text-align: center; border: 1px solid #e0e0e0; }
+        .sns-table th { background-color: #f7f9fc; font-size: 0.9em; }
+        .sns-table td:first-child { text-align: left; font-weight: bold; background-color: #f7f9fc; }
+        .sns-table input { text-align: center; }
     </style>
 </head>
 <body>
@@ -49,49 +51,62 @@
             </div>
         </div>
 
+        <!-- ★★★ ここからが「制作課」の新しいUI ★★★ -->
         <div class="card">
             <h2>制作課 入力項目</h2>
-            <div class="grid">
-                <div class="color-box bg-blue">
-                    <label for="homepageOcReservations">ホームページOC予約数</label>
-                    <input type="number" id="homepageOcReservations" value="0">
-                </div>
-                <div class="color-box bg-cyan">
-                    <label for="snsFollowers">SNSフォロワー情報</label>
-                    <input type="number" id="snsFollowers" value="0">
-                </div>
+
+            <h3>ホームページOC予約数</h3>
+            <div class="grid-4-col">
+                <div><label>大阪校</label><input type="number" value="0" class="hp-oc" data-campus="大阪校"></div>
+                <div><label>神戸校</label><input type="number" value="0" class="hp-oc" data-campus="神戸校"></div>
+                <div><label>ベルブラ</label><input type="number" value="0" class="hp-oc" data-campus="ベルブラ"></div>
+                <div><label>熊本校</label><input type="number" value="0" class="hp-oc" data-campus="熊本校"></div>
             </div>
+
+            <h3 style="margin-top: 30px;">SNSフォロワー数</h3>
+            <table class="sns-table">
+                <thead>
+                    <tr>
+                        <th>キャンパス</th>
+                        <th>Instagram</th>
+                        <th>TikTok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>大阪校</td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="大阪校" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="大阪校" data-platform="TikTok"></td>
+                    </tr>
+                    <tr>
+                        <td>神戸校</td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="神戸校" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="神戸校" data-platform="TikTok"></td>
+                    </tr>
+                    <tr>
+                        <td>ベルブラ</td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="ベルブラ" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="ベルブラ" data-platform="TikTok"></td>
+                    </tr>
+                    <tr>
+                        <td>熊本校</td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="熊本校" data-platform="Instagram"></td>
+                        <td><input type="number" value="0" class="sns-follower" data-campus="熊本校" data-platform="TikTok"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
-        <!-- ★★★ ここからが新しい建築部分 ★★★ -->
         <div class="card" id="gakusei-card">
             <h2>学生課 入力項目</h2>
-
-            <h3>OCエントリー数（大阪校）</h3>
-            <div class="grid-4-col">
-                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="新規"></div>
-                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="リピーター"></div>
-                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="新規"></div>
-                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="リピーター"></div>
-                <!-- 他の学科も同様に追加可能 -->
-            </div>
-
-            <h3 style="margin-top: 30px;">出席項目</h3>
-            <div class="grid-3-col">
-                <div><label>午前</label><input type="number" value="0" class="attendance" data-name="午前"></div>
-                <div><label>午後</label><input type="number" value="0" class="attendance" data-name="午後"></div>
-                <div><label>入試まるわかり講座</label><input type="number" value="0" class="attendance" data-name="入試まるわかり講座"></div>
-            </div>
-
-            <h3 style="margin-top: 30px;">特記事項</h3>
-            <textarea id="remarks" placeholder="特記事項があれば入力してください"></textarea>
+            <p>（ここにOCエントリー数などのフォームが追加されます）</p>
         </div>
 
         <button class="btn" id="saveButton">日報を保存する</button>
     </div>
 
     <script>
-        // (ここのロジックも後で、新しいフォームに対応させていきます)
+        // (ロジックはまだ変更しません)
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
         document.getElementById('saveButton').addEventListener('click', async () => { /* ... */ });
     </script>
