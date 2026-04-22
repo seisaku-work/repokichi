@@ -18,8 +18,6 @@
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .btn { width: 100%; padding: 15px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
         .btn:hover { background: #2980b9; }
-
-        /* ★★★ 新しい入力テーブル用のスタイル ★★★ */
         .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .data-table th, .data-table td { padding: 8px; text-align: center; border: 1px solid #e0e0e0; }
         .data-table th { background-color: #f7f9fc; font-size: 0.9em; }
@@ -31,7 +29,6 @@
 
     <div class="container">
         <div class="logo-header">
-            <!-- ★★★ 修正点 2: ロゴのファイル名を修正 ★★★ -->
             <img src="/repokichi.png" alt="レポきち ロゴ">
         </div>
 
@@ -43,7 +40,6 @@
             </div>
         </div>
 
-        <!-- ★★★ 修正点 1: 制作課のUIをテーブル形式に刷新 ★★★ -->
         <div class="card">
             <h2>制作課 入力項目</h2>
             <table class="data-table" id="seisaku-table">
@@ -92,65 +88,12 @@
         <button class="btn" id="saveButton">日報を保存する</button>
     </div>
 
-    <!-- ★★★ 修正点 3: 保存ボタンのロジックを完全に実装 ★★★ -->
     <script>
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        const saveButton = document.getElementById('saveButton');
-
-        saveButton.addEventListener('click', async () => {
-            saveButton.disabled = true;
-            saveButton.textContent = '保存中...';
-
-            const homepageOcs = [];
-            const snsFollowers = [];
-
-            // テーブルの各行からデータを収集
-            document.querySelectorAll('#seisaku-table tbody tr').forEach(row => {
-                const campus = row.dataset.campus;
-
-                // HP OC予約数を収集
-                const hpInput = row.querySelector('.hp-oc');
-                if (hpInput) {
-                    homepageOcs.push({
-                        campus: campus,
-                        count: parseInt(hpInput.value, 10) || 0
-                    });
-                }
-
-                // SNSフォロワー数を収集
-                row.querySelectorAll('.sns-follower').forEach(snsInput => {
-                    snsFollowers.push({
-                        campus: campus,
-                        platform: snsInput.dataset.platform,
-                        count: parseInt(snsInput.value, 10) || 0
-                    });
-                });
-            });
-
-            const payload = {
-                date: document.getElementById('date').value,
-                homepageOcs: homepageOcs,
-                snsFollowers: snsFollowers
-            };
-
-            try {
-                const response = await fetch('/api/reports', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
-                const result = await response.json();
-                if (result.success) {
-                    alert('成功！日報がデータベースに保存されました。');
-                } else {
-                    alert('エラーが発生しました：' + (result.error || result.message));
-                }
-            } catch (error) {
-                alert('通信エラーが発生しました。');
-            } finally {
-                saveButton.disabled = false;
-                saveButton.textContent = '日報を保存する';
-            }
+        
+        // 保存ボタンの機能は、UIが全てFIXしてから実装します。
+        document.getElementById('saveButton').addEventListener('click', () => {
+            alert('現在、UIを構築中です。保存機能は後ほど実装します。');
         });
     </script>
 </body>
