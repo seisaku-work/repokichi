@@ -11,7 +11,7 @@
         .logo-header img { max-width: 350px; width: 100%; height: auto; }
         .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
-        h3 { color: #555; margin-top: 20px; margin-bottom: 10px; font-size: 1em; border-left: 4px solid #3498db; padding-left: 10px; }
+        h3 { color: #555; margin-top: 30px; margin-bottom: 10px; font-size: 1em; border-left: 4px solid #3498db; padding-left: 10px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
         input, select, textarea { width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 8px; box-sizing: border-box; font-size: 1em; }
         textarea { height: 100px; }
@@ -54,10 +54,10 @@
             </table>
         </div>
 
-        <!-- ★★★ ここからが今回の建築部分です ★★★ -->
         <div class="card" id="gakusei-card">
             <h2>学生課 入力項目</h2>
 
+            <!-- ★★★ ここからが今回の修正部分です ★★★ -->
             <h3>OCエントリー数（大阪校）</h3>
             <div class="grid-4-col">
                 <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="新規"></div>
@@ -65,27 +65,16 @@
                 <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="新規"></div>
                 <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="リピーター"></div>
             </div>
-            <!-- 他のキャンパスの入力欄も、必要に応じてこの下に同じ形式で追加できます -->
 
-            <h3 style="margin-top: 30px;">出席項目</h3>
-            <div class="grid-3-col">
-                <div><label>午前</label><input type="number" value="0" class="attendance" data-name="午前"></div>
-                <div><label>午後</label><input type="number" value="0" class="attendance" data-name="午後"></div>
-                <div><label>入試まるわかり講座</label><input type="number" value="0" class="attendance" data-name="入試まるわかり講座"></div>
+            <h3>OCエントリー数（神戸校）</h3>
+            <div class="grid-4-col">
+                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-type="新規"></div>
+                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-type="リピーター"></div>
+                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="新規"></div>
+                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="リピーター"></div>
             </div>
 
-            <h3 style="margin-top: 30px;">特記事項</h3>
-            <textarea id="remarks" placeholder="特記事項があれば入力してください"></textarea>
-        </div>
-        <!-- ★★★ 建築ここまで ★★★ -->
-
-        <button class="btn" id="saveButton">日報を保存する</button>
-    </div>
-    <script>
-        document.getElementById('date').value = new Date().toISOString().split('T')[0];
-        document.getElementById('saveButton').addEventListener('click', () => {
-            alert('現在、UIを構築中です。保存機能は後ほど実装します。');
-        });
-    </script>
-</body>
-</html>
+            <h3>OCエントリー数（ベルブラ）</h3>
+            <div class="grid-4-col">
+                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="美容科" data-type="新規"></div>
+                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="美容科<span class="cursor">█</span>
