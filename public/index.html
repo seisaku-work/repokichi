@@ -68,4 +68,24 @@
             <!-- 他のキャンパスの入力欄も、必要に応じてこの下に同じ形式で追加できます -->
 
             <h3 style="margin-top: 30px;">出席項目</h3>
-            <div class="grid-<span class="cursor">█</span>
+            <div class="grid-3-col">
+                <div><label>午前</label><input type="number" value="0" class="attendance" data-name="午前"></div>
+                <div><label>午後</label><input type="number" value="0" class="attendance" data-name="午後"></div>
+                <div><label>入試まるわかり講座</label><input type="number" value="0" class="attendance" data-name="入試まるわかり講座"></div>
+            </div>
+
+            <h3 style="margin-top: 30px;">特記事項</h3>
+            <textarea id="remarks" placeholder="特記事項があれば入力してください"></textarea>
+        </div>
+        <!-- ★★★ 建築ここまで ★★★ -->
+
+        <button class="btn" id="saveButton">日報を保存する</button>
+    </div>
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('saveButton').addEventListener('click', () => {
+            alert('現在、UIを構築中です。保存機能は後ほど実装します。');
+        });
+    </script>
+</body>
+</html>
