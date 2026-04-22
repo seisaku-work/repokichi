@@ -59,11 +59,9 @@
 
             <!-- ★★★ ここからが今回の修正部分です ★★★ -->
             <h3>OCエントリー数（大阪校）</h3>
-            <div class="grid-4-col">
+            <div class="grid">
                 <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="新規"></div>
                 <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-type="リピーター"></div>
-                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="新規"></div>
-                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="TB科" data-type="リピーター"></div>
             </div>
 
             <h3>OCエントリー数（神戸校）</h3>
@@ -72,9 +70,43 @@
                 <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="美容科" data-type="リピーター"></div>
                 <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="新規"></div>
                 <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="TB科" data-type="リピーター"></div>
+                <div><label>WP科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-type="新規"></div>
+                <div><label>WP科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="WP科" data-type="リピーター"></div>
+                <div><label>BS科 新規</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-type="新規"></div>
+                <div><label>BS科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-type="リピーター"></div>
             </div>
 
             <h3>OCエントリー数（ベルブラ）</h3>
             <div class="grid-4-col">
-                <div><label>美容科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="美容科" data-type="新規"></div>
-                <div><label>美容科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="美容科<span class="cursor">█</span>
+                <div><label>TB科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-type="新規"></div>
+                <div><label>TB科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="TB科" data-type="リピーター"></div>
+                <div><label>WP科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-type="新規"></div>
+                <div><label>WP科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="WP科" data-type="リピーター"></div>
+                <div><label>BS科 新規</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-type="新規"></div>
+                <div><label>BS科 リピ</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-type="リピーター"></div>
+            </div>
+
+            <!-- 熊本校の学科構成が未確定のため、確認後にここに追加します -->
+            <!-- ★★★ 修正ここまで ★★★ -->
+
+            <h3 style="margin-top: 30px;">出席項目</h3>
+            <div class="grid-3-col">
+                <div><label>午前</label><input type="number" value="0" class="attendance" data-name="午前"></div>
+                <div><label>午後</label><input type="number" value="0" class="attendance" data-name="午後"></div>
+                <div><label>入試まるわかり講座</label><input type="number" value="0" class="attendance" data-name="入試まるわかり講座"></div>
+            </div>
+
+            <h3 style="margin-top: 30px;">特記事項</h3>
+            <textarea id="remarks" placeholder="特記事項があれば入力してください"></textarea>
+        </div>
+
+        <button class="btn" id="saveButton">日報を保存する</button>
+    </div>
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('saveButton').addEventListener('click', () => {
+            alert('現在、UIを構築中です。保存機能は後ほど実装します。');
+        });
+    </script>
+</body>
+</html>
