@@ -1,9 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const multer = require('multer'); // ★ 追加：ファイルアップロード用
+const xlsx = require('xlsx'); // ★ 追加：Excel解析用
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- ファイルアップロード設定 ---
+const upload = multer({ storage: multer.memoryStorage() }); // メモリ上にファイルを一時保存
 
 // --- 1. データベース接続 ---
 const MONGO_URI = process.env.MONGODB_URI;
@@ -33,30 +38,49 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // --- 4. API（データの出入り口）定義 ---
 
-// ★★★【新機能】日報を新規作成するためのAPI ★★★
+// [POST] /api/reports (日報保存用API - 今回は変更なし)
 app.post('/api/reports', async (req, res) => {
   try {
-    // まずは送られてきたデータで、日報の「殻」だけを作成します。
-    // （将来的には、SNSやOCエントリーの詳細データもここで一緒に保存します）
     const newReport = new Report({
       date: req.body.date,
       homepageOcReservations: req.body.homepageOcReservations,
-      // snsFollowersは、実際にはSnsStatモデルに保存するので、ここでは直接保存しません。
-      // remarks: req.body.remarks,
     });
-
-    await newReport.save(); // データベースに保存
-
-    // 成功したことをフロントエンドに伝える
+    await newReport.save();
     res.status(201).json({ success: true, message: '日報が正常に保存されました。', data: newReport });
-
   } catch (error) {
     console.error("日報の保存中にエラーが発生しました:", error);
-    // 失敗したことをフロントエンドに伝える
     res.status(500).json({ success: false, message: 'サーバー側でエラーが発生しました。', error: error.message });
   }
 });
 
+// ★★★ ここからが新しい建築部分です ★★★
+// [POST] /api/import (Excelインポート用API)
+app.post('/api/import', upload.single('excelFile'), async (req, res) => {
+    console.log('--- 🚚 Excelファイル受信開始 ---');
+
+    if (!req.file) {
+        console.log('❌ ファイルがアップロードされませんでした。');
+        return res.status(400).json({ success: false, message: 'ファイルが選択されていません。' });
+    }
+
+    try {
+        console.log(`📄 ファイル名: ${req.file.originalname}`);
+        console.log(`⚖️ ファイルサイズ: ${req.file.size} bytes`);
+        
+        // 現時点では、ファイルを受け取れたことだけを確認します。
+        // Excelを解析してDBに保存する複雑な処理は、次のステップで実装します。
+        
+        console.log('✅ ファイルの受信に成功しました。');
+        res.status(200).json({ success: true, message: 'ファイルを受け取りました。解析処理はこれから実装します。' });
+
+    } catch (error) {
+        console.error('❌ インポート処理中にエラーが発生:', error);
+        res.status(500).json({ success: false, message: 'サーバー側でエラーが発生しました。' });
+    } finally {
+        console.log('--- 🚚 ファイル受信処理完了 ---');
+    }
+});
+// ★★★ 建築ここまで ★★★
 
 // --- 5. サーバー起動 ---
 app.listen(PORT, () => {
