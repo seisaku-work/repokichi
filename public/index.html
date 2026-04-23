@@ -7,8 +7,9 @@
     <style>
         body { font-family: sans-serif; background-color: #f4f7f9; color: #333; margin: 0; padding: 20px; }
         .container { max-width: 800px; margin: 0 auto; }
-        .logo-header { text-align: center; margin-bottom: 30px; }
+        .logo-header { text-align: center; margin-bottom: 15px; } /* margin-bottomを調整 */
         .logo-header img { max-width: 350px; width: 100%; height: auto; }
+        .nav-link { display: block; text-align: center; margin-bottom: 30px; font-weight: bold; } /* ★リンク用のスタイルを追加 */
         .card { background: #fff; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h2 { color: #3498db; border-bottom: 2px solid #eaf2f8; padding-bottom: 10px; margin-top: 0; font-size: 1.2em; }
         h3 { color: #333; font-weight: 600; margin-top: 30px; margin-bottom: 15px; font-size: 1.1em; border-left: 4px solid #3498db; padding-left: 12px; }
@@ -33,6 +34,10 @@
         <div class="logo-header">
             <img src="/repokichi.png" alt="レポきち ロゴ">
         </div>
+        
+        <!-- ★★★ ここにリンクを追加しました ★★★ -->
+        <a href="/import.html" class="nav-link">⚙️ 過去データをインポートする</a>
+
         <div class="card">
             <h2>基本情報</h2>
             <div class="grid">
@@ -54,11 +59,8 @@
                 </tbody>
             </table>
         </div>
-
         <div class="card" id="gakusei-card">
             <h2>学生課 入力項目</h2>
-
-            <!-- ★★★ ここからが今回の修正部分です ★★★ -->
             <h3>OCエントリー数（大阪校）</h3>
             <div class="department-group">
                 <h4>美容科</h4>
@@ -68,7 +70,6 @@
                     <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="大阪校" data-dept="美容科" data-grade="高1"></div>
                 </div>
             </div>
-
             <h3>OCエントリー数（神戸校）</h3>
             <div class="department-group">
                 <h4>美容科</h4>
@@ -102,7 +103,6 @@
                     <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="神戸校" data-dept="BS科" data-grade="高1"></div>
                 </div>
             </div>
-
             <h3>OCエントリー数（ベルブラ）</h3>
             <div class="department-group">
                 <h4>TB科</h4>
@@ -128,21 +128,16 @@
                     <div><label>高1生</label><input type="number" value="0" class="oc-entry" data-campus="ベルブラ" data-dept="BS科" data-grade="高1"></div>
                 </div>
             </div>
-
             <!-- 熊本校の学科構成が未確定のため、確認後にここに追加します -->
-            <!-- ★★★ 修正ここまで ★★★ -->
-
             <h3 style="margin-top: 30px;">出席項目</h3>
             <div class="grid-3-col">
                 <div><label>午前</label><input type="number" value="0" class="attendance" data-name="午前"></div>
                 <div><label>午後</label><input type="number" value="0" class="attendance" data-name="午後"></div>
                 <div><label>入試まるわかり講座</label><input type="number" value="0" class="attendance" data-name="入試まるわかり講座"></div>
             </div>
-
             <h3 style="margin-top: 30px;">特記事項</h3>
             <textarea id="remarks" placeholder="特記事項があれば入力してください"></textarea>
         </div>
-
         <button class="btn" id="saveButton">日報を保存する</button>
     </div>
     <script>
