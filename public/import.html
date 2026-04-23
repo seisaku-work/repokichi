@@ -11,7 +11,11 @@
         h1 { color: #2c3e50; }
         p { color: #7f8c8d; line-height: 1.6; }
         .upload-area { margin-top: 30px; padding: 40px; border: 2px dashed #bdc3c7; border-radius: 8px; background-color: #ecf0f1; }
-        .upload-area p { font-weight: bold; color: #34495e; }
+        .btn { display: inline-block; padding: 12px 30px; margin-top: 20px; font-size: 1.1em; font-weight: bold; color: #fff; background: #3498db; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: #2980b9; }
+        .btn:disabled { background: #95a5a6; cursor: not-allowed; }
+        #fileName { font-weight: bold; color: #2c3e50; margin-top: 15px; }
+        #message { margin-top: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -20,13 +24,81 @@
         <div class="card">
             <h1>過去データのインポート</h1>
             <p>
-                ここに、過去1年分のExcelデータをアップロードする機能を設置します。<br>
-                この作業により、「昨年度の数値を参照する」などの強力な機能が実現可能になります。
+                過去1年分のExcelファイル（.xlsx, .xls）を選択してアップロードしてください。<br>
+                データはデータベースに一括で登録されます。
             </p>
+            
+            <!-- ★★★ ここからが新しい建築部分です ★★★ -->
             <div class="upload-area">
-                <p>（ここにファイル選択ボタンが設置されます）</p>
+                <input type="file" id="excelFile" accept=".xlsx, .xls" style="display: none;">
+                <button class="btn" id="selectFileButton">Excelファイルを選択</button>
+                <p id="fileName">ファイルが選択されていません</p>
             </div>
+            <button class="btn" id="uploadButton" disabled>アップロードを実行</button>
+            <p id="message"></p>
+            <!-- ★★★ 建築ここまで ★★★ -->
+
         </div>
+        <a href="/" style="display: block; margin-top: 30px;">日報入力ページに戻る</a>
     </div>
+
+    <script>
+        const selectFileButton = document.getElementById('selectFileButton');
+        const excelFileInput = document.getElementById('excelFile');
+        const fileNameDisplay = document.getElementById('fileName');
+        const uploadButton = document.getElementById('uploadButton');
+        const messageDisplay = document.getElementById('message');
+
+        selectFileButton.addEventListener('click', () => excelFileInput.click());
+
+        excelFileInput.addEventListener('change', () => {
+            if (excelFileInput.files.length > 0) {
+                fileNameDisplay.textContent = `選択中のファイル: ${excelFileInput.files[0].name}`;
+                uploadButton.disabled = false;
+                messageDisplay.textContent = '';
+            } else {
+                fileNameDisplay.textContent = 'ファイルが選択されていません';
+                uploadButton.disabled = true;
+            }
+        });
+
+        uploadButton.addEventListener('click', async () => {
+            if (excelFileInput.files.length === 0) {
+                messageDisplay.textContent = 'エラー: ファイルを選択してください。';
+                messageDisplay.style.color = 'red';
+                return;
+            }
+
+            uploadButton.disabled = true;
+            uploadButton.textContent = 'アップロード中...';
+            messageDisplay.textContent = 'サーバーにファイルを送信しています...';
+            messageDisplay.style.color = '#3498db';
+
+            const formData = new FormData();
+            formData.append('excelFile', excelFileInput.files[0]);
+
+            try {
+                const response = await fetch('/api/import', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    messageDisplay.textContent = `成功: ${result.message}`;
+                    messageDisplay.style.color = 'green';
+                } else {
+                    throw new Error(result.message || '不明なエラーが発生しました。');
+                }
+            } catch (error) {
+                messageDisplay.textContent = `エラー: ${error.message}`;
+                messageDisplay.style.color = 'red';
+            } finally {
+                uploadButton.disabled = false;
+                uploadButton.textContent = 'アップロードを実行';
+            }
+        });
+    </script>
 </body>
 </html>
