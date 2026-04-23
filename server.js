@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const multer = require('multer'); // ★ 追加：ファイルアップロード用
-const xlsx = require('xlsx'); // ★ 追加：Excel解析用
+const multer = require('multer');
+const xlsx = require('xlsx'); // ★ この行が主役です
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // --- ファイルアップロード設定 ---
-const upload = multer({ storage: multer.memoryStorage() }); // メモリ上にファイルを一時保存
+const upload = multer({ storage: multer.memoryStorage() });
 
 // --- 1. データベース接続 ---
 const MONGO_URI = process.env.MONGODB_URI;
@@ -53,7 +53,7 @@ app.post('/api/reports', async (req, res) => {
   }
 });
 
-// ★★★ ここからが新しい建築部分です ★★★
+
 // [POST] /api/import (Excelインポート用API)
 app.post('/api/import', upload.single('excelFile'), async (req, res) => {
     console.log('--- 🚚 Excelファイル受信開始 ---');
@@ -65,13 +65,31 @@ app.post('/api/import', upload.single('excelFile'), async (req, res) => {
 
     try {
         console.log(`📄 ファイル名: ${req.file.originalname}`);
-        console.log(`⚖️ ファイルサイズ: ${req.file.size} bytes`);
+
+        // ★★★ ここからが今回の修正部分です ★★★
+        console.log('--- 📖 Excelファイル解析開始 ---');
+
+        // 1. アップロードされたファイルデータを読み込む
+        const workbook = xlsx.read(req.file.buffer, { type: 'buffer' });
+
+        // 2. 最初のシートの名前を取得する
+        const sheetName = workbook.SheetNames[0];
+        console.log(`🔍 最初のシート名: "${sheetName}" を解析します。`);
+        const worksheet = workbook.Sheets[sheetName];
+
+        // 3. シートの内容をJSON形式に変換する
+        //    (Excelの1行目が、JSONのキーになります)
+        const jsonData = xlsx.utils.sheet_to_json(worksheet);
+
+        console.log(`✅ 解析成功！ ${jsonData.length} 件のデータが見つかりました。`);
+
+        // 4. 【重要】解析したデータの一部をログに出力して確認する
+        console.log('--- プレビュー (最初の5件) ---');
+        console.log(jsonData.slice(0, 5));
+        console.log('---------------------------');
         
-        // 現時点では、ファイルを受け取れたことだけを確認します。
-        // Excelを解析してDBに保存する複雑な処理は、次のステップで実装します。
-        
-        console.log('✅ ファイルの受信に成功しました。');
-        res.status(200).json({ success: true, message: 'ファイルを受け取りました。解析処理はこれから実装します。' });
+        res.status(200).json({ success: true, message: `Excelファイルを正常に解析し、${jsonData.length}件のデータを確認しました。` });
+        // ★★★ 修正ここまで ★★★
 
     } catch (error) {
         console.error('❌ インポート処理中にエラーが発生:', error);
@@ -80,7 +98,7 @@ app.post('/api/import', upload.single('excelFile'), async (req, res) => {
         console.log('--- 🚚 ファイル受信処理完了 ---');
     }
 });
-// ★★★ 建築ここまで ★★★
+
 
 // --- 5. サーバー起動 ---
 app.listen(PORT, () => {
